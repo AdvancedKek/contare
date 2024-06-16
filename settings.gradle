@@ -1,0 +1,6 @@
+rootProject.name = 'Contare'
+include 'launcher'
+include 'application'
+include 'domain'
+include 'infrastructure', 'infrastructure:adapter:out:postgres', 'infrastructure:adapter:in:rest'
+
