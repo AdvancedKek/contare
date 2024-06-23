@@ -1,15 +1,10 @@
 plugins {
+    id "org.openapi.generator" version "7.5.0"
     id 'java'
-    id 'org.springframework.boot' version '3.3.0'
-    id 'io.spring.dependency-management' version '1.1.5'
 }
 
-group 'io.github.kozinaki'
+group 'io.github.advancedkek.contare'
 version '1.0-SNAPSHOT'
-
-springBoot {
-    mainClass = 'io.github.kozinaki.Main'
-}
 
 repositories {
     mavenCentral()
@@ -18,11 +13,74 @@ repositories {
 dependencies {
     implementation(project(':application'))
     implementation(project(':domain'))
-    implementation 'org.springframework.boot:spring-boot-starter'
-    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.8.1'
-    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.8.1'
+
+    implementation 'org.springframework.boot:spring-boot-starter-web:3.3.0'
+    implementation 'org.springframework.boot:spring-boot-starter-validation:3.3.0'
+    implementation 'io.spring.gradle:dependency-management-plugin:1.1.5'
+    implementation 'org.springdoc:springdoc-openapi-starter-webmvc-ui:2.5.0'
+
+    implementation 'jakarta.annotation:jakarta.annotation-api:3.0.0'
+
+    implementation 'io.swagger.core.v3:swagger-models:2.2.22'
+    implementation 'io.swagger.core.v3:swagger-annotations:2.2.22'
+
+    compileOnly 'org.projectlombok:lombok:1.18.32'
+    annotationProcessor 'org.projectlombok:lombok:1.18.32'
+
+    implementation 'com.fasterxml.jackson.core:jackson-databind:2.0.1'
 }
 
 test {
     useJUnitPlatform()
 }
+
+openApiGenerate {
+    Provider<RegularFile> generated = layout.buildDirectory.file("generated")
+    var generatedDir = generated.get().asFile
+    inputSpec.set("$rootDir/api/server.yaml")
+    outputDir.set("$generatedDir")
+    generatorName.set("spring")
+    apiPackage.set("io.github.advancedkek.contare.api")
+    modelPackage.set("io.github.advancedkek.contare.api.model")
+    generateModelTests.set(false)
+    generateApiTests.set(false)
+    skipValidateSpec.set(true)
+    configOptions.set([
+            useSpringBoot3: "true",
+            delegatePattern: "true",
+            openApiNullable: "false",
+            enumPropertyNaming: "UPPERCASE",
+            serializationLibrary: "jackson",
+            useTags: "true"
+    ])
+    typeMappings.set([
+            'integer+int64': 'BigInteger',
+            'number+double': 'BigDecimal'
+    ])
+    importMappings.set([
+            BigInteger: 'java.math.BigInteger',
+            BigDecimal: 'java.math.BigDecimal'
+    ])
+}
+
+sourceSets {
+    main {
+        java {
+            Provider<RegularFile> generated = layout.buildDirectory.file("generated")
+            var generatedDir = generated.get().asFile
+            srcDirs("$generatedDir/src/main/java")
+        }
+    }
+}
+
+
+//    configOptions.set([
+//    dateLibrary: "java8",
+//    interfaceOnly: "true",
+//    useSpringBoot3: "true",
+//    openApiNullable: "false",
+//    delegatePattern: "true",
+//    skipDefaultInterface: "true",
+//    enumPropertyNaming: "UPPERCASE",
+//    serializationLibrary: "jackson",
+//    ])
