@@ -1,0 +1,190 @@
+openapi: 3.0.3
+info:
+  title: Contare API
+  description: A simple contare API
+  version: 1.0.0
+paths:
+  /customer:
+    get:
+      tags:
+        - Customer
+      summary: Find customer by ID
+      description: Returns a list of customers
+      operationId: getCustomerById
+      parameters:
+        - name: id
+          in: query
+          required: false
+          description: ID of customer
+          example: "4e519c68-9562-405d-8254-19c7d2925169"
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CustomersResponse'
+    post:
+      tags:
+        - Customer
+      summary: Add a new customer
+      description: Add a new customer
+      operationId: addCustomer
+      requestBody:
+        description: Create a new customer
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateCustomerRequest'
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CustomerResponse'
+    put:
+      tags:
+        - Customer
+      summary: Update an existing customer
+      description: Update an existing customer
+      operationId: updateCustomer
+      requestBody:
+        description: Update an existing customer
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateCustomerRequest'
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CustomerResponse'
+    delete:
+      tags:
+        - Customer
+      summary: Delete an existing customer by ID
+      description: Delete an existing customer
+      operationId: deleteCustomer
+      parameters:
+        - name: id
+          in: query
+          required: true
+          description: ID of customer
+          example: "4e519c68-9562-405d-8254-19c7d2925169"
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '204':
+          description: Successful operation
+components:
+  schemas:
+    CustomersResponse:
+      required:
+        - data
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Customer'
+    CustomerResponse:
+      required:
+        - data
+      properties:
+        data:
+          $ref: '#/components/schemas/Customer'
+    Customer:
+      type: object
+      required:
+        - id
+        - firstName
+        - lastName
+        - phone
+        - address
+        - email
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: ID of customer
+        firstName:
+          type: string
+          example: John
+        lastName:
+          type: string
+          example: Galt
+        patronymic:
+          type: string
+          example: Something's
+        phone:
+          type: string
+          example: +7 999 999 99 99
+        address:
+          type: string
+          example: Al Raha Beach st.
+        email:
+          type: string
+          example: galt@email.com
+    CreateCustomerRequest:
+      type: object
+      required:
+        - firstName
+        - lastName
+        - phone
+        - address
+        - email
+      properties:
+        firstName:
+          type: string
+          example: John
+        lastName:
+          type: string
+          example: Galt
+        patronymic:
+          type: string
+        phone:
+          type: string
+          example: +7 999 999 99 99
+        address:
+          type: string
+          example: Al Raha Beach st.
+        email:
+          type: string
+          example: galt@email.com
+    UpdateCustomerRequest:
+      type: object
+      required:
+        - id
+        - firstName
+        - lastName
+        - phone
+        - address
+        - email
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: ID of customer
+        firstName:
+          type: string
+          example: John
+        lastName:
+          type: string
+          example: Galt
+        patronymic:
+          type: string
+        phone:
+          type: string
+          example: +7 999 999 99 99
+        address:
+          type: string
+          example: Al Raha Beach st.
+        email:
+          type: string
+          example: galt@email.com

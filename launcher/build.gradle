@@ -3,26 +3,14 @@ plugins {
     id 'application'
     id 'org.springframework.boot' version '3.3.0'
     id 'io.spring.dependency-management' version '1.1.5'
-
 }
 
-application {
-    mainClass = 'io.github.kozinaki.Main'
+bootJar {
+    enabled = false
 }
 
-group 'io.github.kozinaki'
+group 'io.github.advancedkek.contare'
 version '1.0-SNAPSHOT'
-
-
-springBoot {
-    mainClass = 'io.github.kozinaki.Main'
-}
-//
-//jar {
-//    manifest {
-//        attributes ('Main-Class': 'io.github.kozinaki.Main')
-//    }
-//}
 
 repositories {
     mavenCentral()
@@ -31,11 +19,10 @@ repositories {
 dependencies {
     implementation(project(':application'))
     implementation(project(':domain'))
-    implementation project(':infrastructure:adapter:out:postgres')
+    implementation project(':infrastructure:adapter:out:h2')
     implementation project(':infrastructure:adapter:in:rest')
+
     implementation 'org.springframework.boot:spring-boot-starter'
-    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.8.1'
-    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.8.1'
 }
 
 test {
