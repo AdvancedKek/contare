@@ -83,6 +83,85 @@ paths:
       responses:
         '204':
           description: Successful operation
+  /employer:
+    get:
+      tags:
+        - Employer
+      summary: Find employer by ID
+      description: Returns a list of employers
+      operationId: getEmployerById
+      parameters:
+        - name: id
+          in: query
+          required: false
+          description: ID of employer
+          example: "4e519c68-9562-405d-8254-19c7d2925169"
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EmployersResponse'
+    post:
+      tags:
+        - Employer
+      summary: Add a new employer
+      description: Add a new employer
+      operationId: addEmployer
+      requestBody:
+        description: Create a new employer
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateEmployerRequest'
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EmployerResponse'
+    put:
+      tags:
+        - Employer
+      summary: Update an existing customer
+      description: Update an existing customer
+      operationId: updateEmployer
+      requestBody:
+        description: Update an existing customer
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateCustomerRequest'
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CustomerResponse'
+    delete:
+      tags:
+        - Employer
+      summary: Delete an existing customer by ID
+      description: Delete an existing customer
+      operationId: deleteEmployer
+      parameters:
+        - name: id
+          in: query
+          required: true
+          description: ID of customer
+          example: "4e519c68-9562-405d-8254-19c7d2925169"
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '204':
+          description: Successful operation
 components:
   schemas:
     CustomersResponse:
@@ -158,6 +237,110 @@ components:
           type: string
           example: galt@email.com
     UpdateCustomerRequest:
+      type: object
+      required:
+        - id
+        - firstName
+        - lastName
+        - phone
+        - address
+        - email
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: ID of customer
+        firstName:
+          type: string
+          example: John
+        lastName:
+          type: string
+          example: Galt
+        patronymic:
+          type: string
+        phone:
+          type: string
+          example: +7 999 999 99 99
+        address:
+          type: string
+          example: Al Raha Beach st.
+        email:
+          type: string
+          example: galt@email.com
+
+    EmployersResponse:
+      required:
+        - data
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Employer'
+    EmployerResponse:
+      required:
+        - data
+      properties:
+        data:
+          $ref: '#/components/schemas/Employer'
+    Employer:
+      type: object
+      required:
+        - id
+        - firstName
+        - lastName
+        - phone
+        - address
+        - email
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: ID of customer
+        firstName:
+          type: string
+          example: John
+        lastName:
+          type: string
+          example: Galt
+        patronymic:
+          type: string
+          example: Something's
+        phone:
+          type: string
+          example: +7 999 999 99 99
+        address:
+          type: string
+          example: Al Raha Beach st.
+        email:
+          type: string
+          example: galt@email.com
+    CreateEmployerRequest:
+      type: object
+      required:
+        - firstName
+        - lastName
+        - phone
+        - address
+        - email
+      properties:
+        firstName:
+          type: string
+          example: John
+        lastName:
+          type: string
+          example: Galt
+        patronymic:
+          type: string
+        phone:
+          type: string
+          example: +7 999 999 99 99
+        address:
+          type: string
+          example: Al Raha Beach st.
+        email:
+          type: string
+          example: galt@email.com
+    UpdateEmployerRequest:
       type: object
       required:
         - id
