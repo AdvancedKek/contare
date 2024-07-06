@@ -10,7 +10,7 @@ bootJar {
 }
 
 springBoot {
-    mainClass = 'io.github.advancedkek.contare.Main'
+    mainClass = 'io.github.advancedkek.contare.LauncherApplication'
 }
 
 group 'io.github.advancedkek.contare'
