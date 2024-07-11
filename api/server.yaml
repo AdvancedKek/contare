@@ -162,6 +162,86 @@ paths:
       responses:
         '204':
           description: Successful operation
+  /product:
+    get:
+      tags:
+        - Product
+      summary: Find product by ID
+      description: Returns a list of products
+      operationId: getProductById
+      parameters:
+        - name: id
+          in: query
+          required: false
+          description: ID of product
+          example: "4e519c68-9562-405d-8254-19c7d2925169"
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProductsResponse'
+    post:
+      tags:
+        - Product
+      summary: Add a new product
+      description: Add a new product
+      operationId: addProduct
+      requestBody:
+        description: Create a new product
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateProductRequest'
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProductResponse'
+    put:
+      tags:
+        - Product
+      summary: Update an existing product
+      description: Update an existing product
+      operationId: updateProduct
+      requestBody:
+        description: Update an existing product
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateProductRequest'
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProductResponse'
+    delete:
+      tags:
+        - Product
+      summary: Delete an existing product by ID
+      description: Delete an existing product
+      operationId: deleteProduct
+      parameters:
+        - name: id
+          in: query
+          required: true
+          description: ID of product
+          example: "4e519c68-9562-405d-8254-19c7d2925169"
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '204':
+          description: Successful operation
+
 
 components:
   schemas:
@@ -172,7 +252,7 @@ components:
         data:
           type: array
           items:
-            $ref: '#/components/schemas/Customer'
+            $ref: '#/components/schemas/customer'
     CustomerResponse:
       required:
         - data
@@ -276,7 +356,7 @@ components:
         data:
           type: array
           items:
-            $ref: '#/components/schemas/Employer'
+            $ref: '#/components/schemas/employer'
     EmployerResponse:
       required:
         - data
@@ -372,3 +452,76 @@ components:
         email:
           type: string
           example: galt@email.com
+
+    ProductsResponse:
+      required:
+        - data
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/product'
+    ProductResponse:
+      required:
+        - data
+      properties:
+        data:
+          $ref: '#/components/schemas/product'
+    Product:
+      type: object
+      required:
+        - id
+        - name
+        - description
+        - price
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: ID of product
+        name:
+          type: string
+          example: Oil change
+        description:
+          type: string
+          example: Remove the old oil and full a new one
+        price:
+          type: string
+          example: 300
+    CreateProductRequest:
+      type: object
+      required:
+        - name
+        - description
+        - price
+      properties:
+        name:
+          type: string
+          example: Oil change
+        description:
+          type: string
+          example: Remove the old oil and full a new one
+        price:
+          type: string
+          example: 300
+    UpdateProductRequest:
+      type: object
+      required:
+        - id
+        - name
+        - description
+        - price
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: ID of product
+        name:
+          type: string
+          example: Oil change
+        description:
+          type: string
+          example: Remove the old oil and full a new one
+        price:
+          type: string
+          example: 300
