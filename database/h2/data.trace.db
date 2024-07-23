@@ -1,0 +1,9 @@
+2024-07-23 17:18:45.483308+03:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "PRODUCT" not found; SQL statement:
+insert into product (description,name,price,id) values (?,?,?,?) [42102-224]
+2024-07-23 17:19:23.363254+03:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "PRODUCT" not found; SQL statement:
+select count(*) from product pe1_0 where pe1_0.id=? [42102-224]
+2024-07-23 17:36:43.446907+03:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "PRODUCT" not found; SQL statement:
+select pe1_0.id,pe1_0.description,pe1_0.name,pe1_0.price from product pe1_0 [42102-224]
