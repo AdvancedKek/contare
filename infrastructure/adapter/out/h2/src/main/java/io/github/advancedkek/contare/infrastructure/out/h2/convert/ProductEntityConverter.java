@@ -18,6 +18,7 @@ public class ProductEntityConverter {
                 .id(entity.getId())
                 .name(entity.getName())
                 .description(entity.getDescription())
+                .price(entity.getPrice())
                 .build();
     }
 }
