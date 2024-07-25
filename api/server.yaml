@@ -162,6 +162,85 @@ paths:
       responses:
         '204':
           description: Successful operation
+  /provider:
+    get:
+      tags:
+        - Provider
+      summary: Find provider by ID
+      description: Returns a list of providers
+      operationId: getProviderById
+      parameters:
+        - name: id
+          in: query
+          required: false
+          description: ID of provider
+          example: "4e519c68-9562-405d-8254-19c7d2925169"
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProvidersResponse'
+    post:
+      tags:
+        - Provider
+      summary: Add a new provider
+      description: Add a new provider
+      operationId: addProvider
+      requestBody:
+        description: Create a new provider
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateProviderRequest'
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProviderResponse'
+    put:
+      tags:
+        - Provider
+      summary: Update an existing provider
+      description: Update an existing provider
+      operationId: updateProvider
+      requestBody:
+        description: Update an existing provider
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateProviderRequest'
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProviderResponse'
+    delete:
+      tags:
+        - Provider
+      summary: Delete an existing provider by ID
+      description: Delete an existing provider
+      operationId: deleteCustomer
+      parameters:
+        - name: id
+          in: query
+          required: true
+          description: ID of provider
+          example: "4e519c68-9562-405d-8254-19c7d2925169"
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '204':
+          description: Successful operation
 
 components:
   schemas:
@@ -363,6 +442,91 @@ components:
           example: Galt
         patronymic:
           type: string
+        phone:
+          type: string
+          example: +7 999 999 99 99
+        address:
+          type: string
+          example: Al Raha Beach st.
+        email:
+          type: string
+          example: galt@email.com
+
+    ProvidersResponse:
+      required:
+        - data
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Provider'
+    ProviderResponse:
+      required:
+        - data
+      properties:
+        data:
+          $ref: '#/components/schemas/Provider'
+    Provider:
+      type: object
+      required:
+        - id
+        - name
+        - phone
+        - address
+        - email
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: ID of provider
+        name:
+          type: string
+          example: Bosh
+        phone:
+          type: string
+          example: +7 999 999 99 99
+        address:
+          type: string
+          example: Al Raha Beach st.
+        email:
+          type: string
+          example: galt@email.com
+    CreateProviderRequest:
+      type: object
+      required:
+        - name
+        - phone
+        - address
+        - email
+      properties:
+        name:
+          type: string
+          example: Bosh
+        phone:
+          type: string
+          example: +7 999 999 99 99
+        address:
+          type: string
+          example: Al Raha Beach st.
+        email:
+          type: string
+          example: galt@email.com
+    UpdateProviderRequest:
+      type: object
+      required:
+        - id
+        - name
+        - phone
+        - address
+        - email
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: ID of provider
+        name:
+          type: string
+          example: Bosh
         phone:
           type: string
           example: +7 999 999 99 99
