@@ -228,7 +228,7 @@ paths:
         - Provider
       summary: Delete an existing provider by ID
       description: Delete an existing provider
-      operationId: deleteCustomer
+      operationId: deleteProvider
       parameters:
         - name: id
           in: query
