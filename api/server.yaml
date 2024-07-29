@@ -162,6 +162,85 @@ paths:
       responses:
         '204':
           description: Successful operation
+  /provider:
+    get:
+      tags:
+        - Provider
+      summary: Find provider by ID
+      description: Returns a list of providers
+      operationId: getProviderById
+      parameters:
+        - name: id
+          in: query
+          required: false
+          description: ID of provider
+          example: "4e519c68-9562-405d-8254-19c7d2925169"
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProvidersResponse'
+    post:
+      tags:
+        - Provider
+      summary: Add a new provider
+      description: Add a new provider
+      operationId: addProvider
+      requestBody:
+        description: Create a new provider
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateProviderRequest'
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProviderResponse'
+    put:
+      tags:
+        - Provider
+      summary: Update an existing provider
+      description: Update an existing provider
+      operationId: updateProvider
+      requestBody:
+        description: Update an existing provider
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateProviderRequest'
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProviderResponse'
+    delete:
+      tags:
+        - Provider
+      summary: Delete an existing provider by ID
+      description: Delete an existing provider
+      operationId: deleteProvider
+      parameters:
+        - name: id
+          in: query
+          required: true
+          description: ID of provider
+          example: "4e519c68-9562-405d-8254-19c7d2925169"
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '204':
+          description: Successful operation
   /product:
     get:
       tags:
@@ -241,8 +320,6 @@ paths:
       responses:
         '204':
           description: Successful operation
-
-
 components:
   schemas:
     CustomersResponse:
@@ -252,7 +329,7 @@ components:
         data:
           type: array
           items:
-            $ref: '#/components/schemas/customer'
+            $ref: '#/components/schemas/Customer'
     CustomerResponse:
       required:
         - data
@@ -356,7 +433,7 @@ components:
         data:
           type: array
           items:
-            $ref: '#/components/schemas/employer'
+            $ref: '#/components/schemas/Employer'
     EmployerResponse:
       required:
         - data
@@ -453,6 +530,91 @@ components:
           type: string
           example: galt@email.com
 
+    ProvidersResponse:
+      required:
+        - data
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Provider'
+    ProviderResponse:
+      required:
+        - data
+      properties:
+        data:
+          $ref: '#/components/schemas/Provider'
+    Provider:
+      type: object
+      required:
+        - id
+        - name
+        - phone
+        - address
+        - email
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: ID of provider
+        name:
+          type: string
+          example: Bosh
+        phone:
+          type: string
+          example: +7 999 999 99 99
+        address:
+          type: string
+          example: Al Raha Beach st.
+        email:
+          type: string
+          example: galt@email.com
+    CreateProviderRequest:
+      type: object
+      required:
+        - name
+        - phone
+        - address
+        - email
+      properties:
+        name:
+          type: string
+          example: Bosh
+        phone:
+          type: string
+          example: +7 999 999 99 99
+        address:
+          type: string
+          example: Al Raha Beach st.
+        email:
+          type: string
+          example: galt@email.com
+    UpdateProviderRequest:
+      type: object
+      required:
+        - id
+        - name
+        - phone
+        - address
+        - email
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: ID of provider
+        name:
+          type: string
+          example: Bosh
+        phone:
+          type: string
+          example: +7 999 999 99 99
+        address:
+          type: string
+          example: Al Raha Beach st.
+        email:
+          type: string
+          example: galt@email.com
+
     ProductsResponse:
       required:
         - data
@@ -460,20 +622,21 @@ components:
         data:
           type: array
           items:
-            $ref: '#/components/schemas/product'
+            $ref: '#/components/schemas/Product'
     ProductResponse:
       required:
         - data
       properties:
         data:
-          $ref: '#/components/schemas/product'
+          $ref: '#/components/schemas/Product'
     Product:
       type: object
       required:
         - id
         - name
-        - description
-        - price
+        - phone
+        - address
+        - email
       properties:
         id:
           type: string
@@ -481,36 +644,44 @@ components:
           description: ID of product
         name:
           type: string
-          example: Oil change
-        description:
+          example: Bosh
+        phone:
           type: string
-          example: Remove the old oil and full a new one
-        price:
+          example: +7 999 999 99 99
+        address:
           type: string
-          example: 300
+          example: Al Raha Beach st.
+        email:
+          type: string
+          example: galt@email.com
     CreateProductRequest:
       type: object
       required:
         - name
-        - description
-        - price
+        - phone
+        - address
+        - email
       properties:
         name:
           type: string
-          example: Oil change
-        description:
+          example: Bosh
+        phone:
           type: string
-          example: Remove the old oil and full a new one
-        price:
+          example: +7 999 999 99 99
+        address:
           type: string
-          example: 300
+          example: Al Raha Beach st.
+        email:
+          type: string
+          example: galt@email.com
     UpdateProductRequest:
       type: object
       required:
         - id
         - name
-        - description
-        - price
+        - phone
+        - address
+        - email
       properties:
         id:
           type: string
@@ -518,10 +689,14 @@ components:
           description: ID of product
         name:
           type: string
-          example: Oil change
-        description:
+          example: Bosh
+        phone:
           type: string
-          example: Remove the old oil and full a new one
-        price:
+          example: +7 999 999 99 99
+        address:
           type: string
-          example: 300
+          example: Al Raha Beach st.
+        email:
+          type: string
+          example: galt@email.com
+
