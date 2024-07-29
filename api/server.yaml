@@ -634,9 +634,8 @@ components:
       required:
         - id
         - name
-        - phone
-        - address
-        - email
+        - description
+        - price
       properties:
         id:
           type: string
@@ -644,44 +643,37 @@ components:
           description: ID of product
         name:
           type: string
-          example: Bosh
-        phone:
+          example: Oil replace
+        description:
           type: string
-          example: +7 999 999 99 99
-        address:
+          example: Remove the old oil and add the new one
+        price:
           type: string
-          example: Al Raha Beach st.
-        email:
-          type: string
-          example: galt@email.com
+          example: 300
     CreateProductRequest:
       type: object
       required:
+        - id
         - name
-        - phone
-        - address
-        - email
+        - description
+        - price
       properties:
         name:
           type: string
-          example: Bosh
-        phone:
+          example: Oil replace
+        description:
           type: string
-          example: +7 999 999 99 99
-        address:
+          example: Remove the old oil and add the new one
+        price:
           type: string
-          example: Al Raha Beach st.
-        email:
-          type: string
-          example: galt@email.com
+          example: 300
     UpdateProductRequest:
       type: object
       required:
         - id
         - name
-        - phone
-        - address
-        - email
+        - description
+        - price
       properties:
         id:
           type: string
@@ -689,14 +681,11 @@ components:
           description: ID of product
         name:
           type: string
-          example: Bosh
-        phone:
+          example: Oil replace
+        description:
           type: string
-          example: +7 999 999 99 99
-        address:
+          example: Remove the old oil and add the new one
+        price:
           type: string
-          example: Al Raha Beach st.
-        email:
-          type: string
-          example: galt@email.com
+          example: 300
 
