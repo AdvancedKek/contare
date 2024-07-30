@@ -49,5 +49,22 @@ VALUES ('5c8ec258-e7b3-4dcd-8e0a-46d77a840edb', 'Bosh', '+7 999 000 00 44', 'у�
     ('2a72bd42-ea00-487a-a406-94173e5ba865', 'SungYong', '+7 999 000 00 45', 'пр-кт Какой-то, дом 22, кв. 66', 'sa@example.com'),
     ('aa888c2d-4413-4008-a908-f55338753599', 'Masuma', '+7 999 000 00 46', 'переулок Такой-то, дом 25, кв. 26', 'masuma@example.com');
 
+-- Create task table
+CREATE TABLE IF NOT EXISTS task (
+  id UUID PRIMARY KEY,
+  employerId UUID,
+  name VARCHAR(128),
+  description VARCHAR(128),
+  price VARCHAR(32),
+  employeePrice VARCHAR(32),
+  servicePrice VARCHAR(32)
+);
+
+
+MERGE INTO task
+    KEY(id)
+VALUES ('70d33a4f-9683-4d8d-96e9-c92fe7b890e2', '09e6f3ce-0295-47c6-a71b-9fdb5f7be5d9', 'Oil change', 'Oil change', '300', '100', '200'),
+    ('bb599787-f6f5-4bc1-8431-91c2920852a5', 'e943e8ae-3451-41f9-b1a8-7190fda7a589', 'Gas pump change', 'Gas pump change', '3000', '1000', '2000'),
+    ('0eac4e6c-3515-43a5-a407-757e8f3a4fde', '7aec1816-1a0e-4b30-b108-c921225f6b0f', 'Windscreen change', 'Windscreen change', '7000', '3000', '4000');
 
 
