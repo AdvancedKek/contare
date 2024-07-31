@@ -3,3 +3,4 @@
 build/
 **/build/
 /database/h2/data.mv.db
+/database/h2/data.trace.db
