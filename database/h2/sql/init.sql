@@ -61,7 +61,7 @@ CREATE TABLE IF NOT EXISTS task (
 );
 
 
-MERGE INTO provider
+MERGE INTO task
     KEY(id)
 VALUES ('70d33a4f-9683-4d8d-96e9-c92fe7b890e2', '09e6f3ce-0295-47c6-a71b-9fdb5f7be5d9', 'Oil change', 'Oil change', '300', '100', '200'),
     ('bb599787-f6f5-4bc1-8431-91c2920852a5', 'e943e8ae-3451-41f9-b1a8-7190fda7a589', 'Gas pump change', 'Gas pump change', '3000', '1000', '2000'),
