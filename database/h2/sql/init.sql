@@ -13,7 +13,7 @@ CREATE TABLE IF NOT EXISTS customer (
 MERGE INTO customer
     KEY(id)
 VALUES ('4e519c68-9562-405d-8254-19c7d2925169', 'Dragon', 'Knight', 'Firestorm''s', '+7 999 000 00 01', 'ул. Какая-та, дом 23, кв. 11', 'dk@example.com'),
-    ('aedf455a-c9d9-4911-ad5e-4b8883615ccb', 'Omni', 'Knight', 'Guardian''s', '+7 999 000 00 02', 'пр-кт Какой-то, дом 1, кв. 65', 'omni@example.com'),
+    ('a5df455a-c9d9-4911-ad5e-4b8883615ccb', 'Omni', 'Knight', 'Guardian''s', '+7 999 000 00 02', 'пр-кт Какой-то, дом 1, кв. 65', 'omni@example.com'),
     ('61c33025-043e-452f-bf1b-dc92978a9496', 'Chaos', 'Knight', 'Phantasm''s', '+7 999 000 00 03', 'переулок Такой-то, дом 4, кв. 22', 'ck@example.com');
 
 -- Create employer table
@@ -51,3 +51,17 @@ VALUES ('5c8ec258-e7b3-4dcd-8e0a-46d77a840edb', 'Bosh', '+7 999 000 00 44', 'у�
 
 
 
+
+-- Create product table
+CREATE TABLE IF NOT EXISTS product (
+  id UUID PRIMARY KEY,
+  name VARCHAR(128),
+  description VARCHAR(128),
+  price VARCHAR(32)
+);
+
+MERGE INTO product
+    KEY(id)
+VALUES ('f70abd93-122c-4b94-8cdb-34e9aa11b503', 'Oil change', 'Remove the old oil and add a new one', '300'),
+    ('27fb01fe-bf8d-4d06-a74f-4227f73fc326', 'Break pads', 'Remove the old break pads and install a new ones', '500'),
+    ('b6419f08-a1ca-4e28-b7ea-00f08b85a5ee', 'Engine change', 'Remove the old engine and install a new one', '3000');

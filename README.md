@@ -10,6 +10,9 @@
 ./gradlew clean && ./gradlew openApiGenerate && ./gradlew build
 ```
 
+
+
+
 ## Build project to jar
 ```shell
 ./gradlew bootJar
@@ -20,5 +23,22 @@
 ./gradlew bootRun
 ```
 
+
+for Windows:
+## Build project
+```shell 
+(.\gradlew clean) -and (.\gradlew openApiGenerate) -and (.\gradlew build)
+```
+
+
+## Build project to jar
+```shell
+.\gradlew bootJar 
+```
+
+## Run project
+```shell
+.\gradlew bootRun
+```
 ### API 
 http://localhost:8080/api/swagger-ui/index.html
