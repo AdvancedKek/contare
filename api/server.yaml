@@ -241,6 +241,85 @@ paths:
       responses:
         '204':
           description: Successful operation
+  /task:
+    get:
+      tags:
+        - Task
+      summary: Find task by ID
+      description: Returns a list of tasks
+      operationId: getTaskById
+      parameters:
+        - name: id
+          in: query
+          required: false
+          description: ID of task
+          example: "4e519c68-9562-405d-8254-19c7d2925169"
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TasksResponse'
+    post:
+      tags:
+        - Task
+      summary: Add a new task
+      description: Add a new task
+      operationId: addTask
+      requestBody:
+        description: Create a new task
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateTaskRequest'
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TaskResponse'
+    put:
+      tags:
+        - Task
+      summary: Update an existing task
+      description: Update an existing task
+      operationId: updateTask
+      requestBody:
+        description: Update an existing task
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateTaskRequest'
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TaskResponse'
+    delete:
+      tags:
+        - Task
+      summary: Delete an existing task by ID
+      description: Delete an existing task
+      operationId: deleteTask
+      parameters:
+        - name: id
+          in: query
+          required: true
+          description: ID of task
+          example: "4e519c68-9562-405d-8254-19c7d2925169"
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '204':
+          description: Successful operation
   /product:
     get:
       tags:
@@ -614,6 +693,118 @@ components:
         email:
           type: string
           example: galt@email.com
+
+    TasksResponse:
+      required:
+        - data
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Task'
+    TaskResponse:
+      required:
+        - data
+      properties:
+        data:
+          $ref: '#/components/schemas/Task'
+    Task:
+      type: object
+      required:
+        - id
+        - employerId
+        - name
+        - description
+        - price
+        - employeePrice
+        - servicePrice
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: ID of task
+        employerId:
+          type: string
+          format: uuid
+          description: ID of task
+        name:
+          type: string
+          example: Oil change
+        description:
+          type: string
+          example: Oil change
+        price:
+          type: string
+          example: 300
+        employeePrice:
+          type: string
+          example: 100
+        servicePrice:
+          type: string
+          example: 200
+    CreateTaskRequest:
+      type: object
+      required:
+        - employerId
+        - name
+        - description
+        - price
+        - employeePrice
+        - servicePrice
+      properties:
+        employerId:
+          type: string
+          format: uuid
+          description: ID of task
+        name:
+          type: string
+          example: Oil change
+        description:
+          type: string
+          example: Oil change
+        price:
+          type: string
+          example: 300
+        employeePrice:
+          type: string
+          example: 100
+        servicePrice:
+          type: string
+          example: 200
+    UpdateTaskRequest:
+      type: object
+      required:
+        - id
+        - employerId
+        - name
+        - description
+        - price
+        - employeePrice
+        - servicePrice
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: ID of task
+        employerId:
+          type: string
+          format: uuid
+          description: ID of employer
+        name:
+          type: string
+          example: Oil change
+        description:
+          type: string
+          example: Oil change
+        price:
+          type: string
+          example: 300
+        employeePrice:
+          type: string
+          example: 100
+        servicePrice:
+          type: string
+          example: 200
 
     ProductsResponse:
       required:
