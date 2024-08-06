@@ -24,7 +24,7 @@
 ```
 
 
-##for Windows:
+## for Windows:
 ### Build project
 ```shell 
 (.\gradlew clean) -and (.\gradlew openApiGenerate) -and (.\gradlew build)
