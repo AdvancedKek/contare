@@ -1,5 +1,5 @@
 -- Create customer table
-CREATE TABLE IF NOT EXISTS user (
+CREATE TABLE IF NOT EXISTS "USER" (
   id UUID PRIMARY KEY,
   first_name VARCHAR(128),
   last_name VARCHAR(128),
@@ -10,7 +10,7 @@ CREATE TABLE IF NOT EXISTS user (
 );
 
 
-MERGE INTO user
+MERGE INTO "USER"
     KEY(id)
 VALUES ('4658c7d5-f3f6-4898-ac12-72026d6e6036', 'Sheldon', 'Cooper', 'George''s', '+7 999 654 00 01', 'ул. Какая-та, дом 23, кв. 11', 'dk@example.com'),
     ('e6d2a0ef-c8a4-4463-863d-90e658a8ff6d', 'Leonard', 'Hofstadter', 'Alfred''s', '+7 999 156 00 02', 'пр-кт Какой-то, дом 1, кв. 65', 'omni@example.com'),
