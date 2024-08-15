@@ -5,7 +5,7 @@
   - PostgreSQL 16
   - SolidJS
 
-## Build project
+### Build project
 ```shell
 ./gradlew clean && ./gradlew openApiGenerate && ./gradlew build
 ```
@@ -13,30 +13,30 @@
 
 
 
-## Build project to jar
+### Build project to jar
 ```shell
 ./gradlew bootJar
 ```
 
-## Run project
+### Run project
 ```shell
 ./gradlew bootRun
 ```
 
 
-for Windows:
-## Build project
+## for Windows:
+### Build project
 ```shell 
 (.\gradlew clean) -and (.\gradlew openApiGenerate) -and (.\gradlew build)
 ```
 
 
-## Build project to jar
+### Build project to jar
 ```shell
 .\gradlew bootJar 
 ```
 
-## Run project
+### Run project
 ```shell
 .\gradlew bootRun
 ```

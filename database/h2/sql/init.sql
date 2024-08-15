@@ -1,5 +1,5 @@
 -- Create customer table
-CREATE TABLE IF NOT EXISTS customer (
+CREATE TABLE IF NOT EXISTS "USER" (
   id UUID PRIMARY KEY,
   first_name VARCHAR(128),
   last_name VARCHAR(128),
@@ -10,11 +10,14 @@ CREATE TABLE IF NOT EXISTS customer (
 );
 
 
-MERGE INTO customer
+MERGE INTO "USER"
     KEY(id)
-VALUES ('4e519c68-9562-405d-8254-19c7d2925169', 'Dragon', 'Knight', 'Firestorm''s', '+7 999 000 00 01', 'ул. Какая-та, дом 23, кв. 11', 'dk@example.com'),
-    ('a5df455a-c9d9-4911-ad5e-4b8883615ccb', 'Omni', 'Knight', 'Guardian''s', '+7 999 000 00 02', 'пр-кт Какой-то, дом 1, кв. 65', 'omni@example.com'),
-    ('61c33025-043e-452f-bf1b-dc92978a9496', 'Chaos', 'Knight', 'Phantasm''s', '+7 999 000 00 03', 'переулок Такой-то, дом 4, кв. 22', 'ck@example.com');
+VALUES ('4658c7d5-f3f6-4898-ac12-72026d6e6036', 'Sheldon', 'Cooper', 'George''s', '+7 999 654 00 01', 'ул. Какая-та, дом 23, кв. 11', 'dk@example.com'),
+    ('e6d2a0ef-c8a4-4463-863d-90e658a8ff6d', 'Leonard', 'Hofstadter', 'Alfred''s', '+7 999 156 00 02', 'пр-кт Какой-то, дом 1, кв. 65', 'omni@example.com'),
+    ('bedea02a-84c2-4826-82b0-e8467b26f671', 'Howard', 'Wolowitz', 'Debbie''s', '+7 999 789 00 03', 'переулок Такой-то, дом 4, кв. 22', 'ck@example.com');
+
+
+
 
 -- Create employer table
 CREATE TABLE IF NOT EXISTS employer (
