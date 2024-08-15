@@ -19,10 +19,12 @@ repositories {
 dependencies {
     implementation(project(':application'))
     implementation(project(':domain'))
-    implementation project(':infrastructure:adapter:out:h2')
-    implementation project(':infrastructure:adapter:in:rest')
+    implementation(project(':infrastructure:adapter:out:h2'))
+    implementation(project(':infrastructure:adapter:in:rest'))
 
     implementation 'org.springframework.boot:spring-boot-starter'
+    implementation "org.springframework.boot:spring-boot-starter-security"
+
 }
 
 test {
