@@ -4,6 +4,85 @@ info:
   description: A simple contare API
   version: 1.0.0
 paths:
+  /user:
+    get:
+      tags:
+        - User
+      summary: Find user by ID
+      description: Returns a list of users
+      operationId: getUserById
+      parameters:
+        - name: id
+          in: query
+          required: false
+          description: ID of user
+          example: "4e519c68-9562-405d-8254-19c7d2925169"
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UsersResponse'
+    post:
+      tags:
+        - User
+      summary: Add a new user
+      description: Add a new user
+      operationId: addUser
+      requestBody:
+        description: Create a new user
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateUserRequest'
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserResponse'
+    put:
+      tags:
+        - User
+      summary: Update an existing user
+      description: Update an existing user
+      operationId: updateUser
+      requestBody:
+        description: Update an existing user
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateUserRequest'
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserResponse'
+    delete:
+      tags:
+        - User
+      summary: Delete an existing user by ID
+      description: Delete an existing user
+      operationId: deleteUser
+      parameters:
+        - name: id
+          in: query
+          required: true
+          description: ID of user
+          example: "4e519c68-9562-405d-8254-19c7d2925169"
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '204':
+          description: Successful operation
   /customer:
     get:
       tags:
@@ -401,6 +480,111 @@ paths:
           description: Successful operation
 components:
   schemas:
+
+    UsersResponse:
+      required:
+        - data
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/User'
+    UserResponse:
+      required:
+        - data
+      properties:
+        data:
+          $ref: '#/components/schemas/User'
+    User:
+      type: object
+      required:
+        - id
+        - firstName
+        - lastName
+        - phone
+        - address
+        - email
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: ID of user
+        firstName:
+          type: string
+          example: John
+        lastName:
+          type: string
+          example: Galt
+        patronymic:
+          type: string
+          example: Something's
+        phone:
+          type: string
+          example: +7 999 999 99 99
+        address:
+          type: string
+          example: Al Raha Beach st.
+        email:
+          type: string
+          example: galt@email.com
+    CreateUserRequest:
+      type: object
+      required:
+        - firstName
+        - lastName
+        - phone
+        - address
+        - email
+      properties:
+        firstName:
+          type: string
+          example: John
+        lastName:
+          type: string
+          example: Galt
+        patronymic:
+          type: string
+        phone:
+          type: string
+          example: +7 999 999 99 99
+        address:
+          type: string
+          example: Al Raha Beach st.
+        email:
+          type: string
+          example: galt@email.com
+    UpdateUserRequest:
+      type: object
+      required:
+        - id
+        - firstName
+        - lastName
+        - phone
+        - address
+        - email
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: ID of user
+        firstName:
+          type: string
+          example: John
+        lastName:
+          type: string
+          example: Galt
+        patronymic:
+          type: string
+        phone:
+          type: string
+          example: +7 999 999 99 99
+        address:
+          type: string
+          example: Al Raha Beach st.
+        email:
+          type: string
+          example: galt@email.com
+
     CustomersResponse:
       required:
         - data
